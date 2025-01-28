@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #4CAF50, #81C784);
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, button {
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+            
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 5px;
+        }
+
+        .result p {
+            margin: 5px 0;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            input, select, button {
+                font-size: 14px;
+            }
+
+            .result {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 20px auto;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            input, select, button {
+                font-size: 12px;
+            }
+
+            .result {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tip Calculator</h1>
+        <label for="billAmount">Bill Amount:</label>
+        <input type="number" id="billAmount" placeholder="Enter bill amount">
+
+        <label for="tipPercentage">Tip Percentage:</label>
+        <select id="tipPercentage">
+            <option value="0.1">10%</option>
+            <option value="0.15">15%</option>
+            <option value="0.2">20%</option>
+            <option value="0.25">25%</option>
+
+        </select>
+
+        <button onclick="calculateTip()">Calculate Tip</button>
+        <button onclick="resetCalculator()" style="margin-top: 10px;">Reset</button>
+
+        <div class="result" id="result" style="display: none;">
+            <p id="tipAmount">Tip Amount: </p>
+            <p id="totalBill">Total Bill: </p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Tip Calculator. All rights reserved.
+    </footer>
+
+    <script>
+        function calculateTip() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value);
+            const tipPercentage = parseFloat(document.getElementById('tipPercentage').value);
+
+            if (isNaN(billAmount) || billAmount <= 0) {
+                alert('Please enter a valid bill amount.');
+                return;
+            }
+
+            const tipAmount = billAmount * tipPercentage;
+            const totalBill = billAmount + tipAmount;
+
+            document.getElementById('tipAmount').textContent = `Tip Amount: $${tipAmount.toFixed(2)}`;
+            document.getElementById('totalBill').textContent = `Total Bill: $${totalBill.toFixed(2)}`;
+
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function resetCalculator() {
+            document.getElementById('billAmount').value = '';
+            document.getElementById('tipPercentage').value = '0.1';
+            document.getElementById('result').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
